@@ -1,0 +1,1 @@
+createdb -U postgres -E utf-8 -W -e ec_2019
