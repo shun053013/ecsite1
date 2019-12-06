@@ -2,20 +2,38 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.User;
-import com.example.form.UserForm;
+import com.example.form.RegisterUserForm;
 import com.example.service.RegisterUserService;
 
 @Controller
 @RequestMapping("")
 public class RegisterUserController {
 
+	@ModelAttribute
+	public RegisterUserForm setUpForm() {
+		return new RegisterUserForm();
+	}
+
+	@RequestMapping("/register")
+	public String index() {
+		return "register_user";
+	}
+
 	@Autowired
 	private RegisterUserService registerUserService;
 
-	public String RegisterUser(UserForm form) {
+	@RequestMapping("/registerUser")
+	public String RegisterUser(@Validated RegisterUserForm form, BindingResult result) {
+		if (result.hasErrors()) {
+			return index();
+		}
+
 		User user = new User();
 		user.setId(form.getId());
 		user.setName(form.getName());
@@ -27,7 +45,7 @@ public class RegisterUserController {
 
 		registerUserService.RegisterUser(user);
 
-		return "register_user";
+		return "login_user";
 
 	}
 
