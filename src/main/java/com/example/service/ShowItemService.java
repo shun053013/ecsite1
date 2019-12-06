@@ -19,6 +19,13 @@ public class ShowItemService {
 		return itemList;
 	}
 	
+	public List<Item> searchByName(String name) {
+		System.out.println("name Ser: " + name);
+
+		List<Item> itemList= itemRepository.findByName(name);
+		return itemList;
+	}
+	
 	
 
 }

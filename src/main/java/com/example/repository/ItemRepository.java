@@ -2,6 +2,7 @@ package com.example.repository;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,6 +13,7 @@ import com.example.domain.Item;
 
 @Repository
 public class ItemRepository {
+	@Autowired
 	private NamedParameterJdbcTemplate template;
 	
 	private final static RowMapper<Item> ITEM_ROW_MAPPER =(rs,i)->{
@@ -38,6 +40,14 @@ public class ItemRepository {
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		Item item = template.queryForObject(sql, param,ITEM_ROW_MAPPER);
 		return item;
+	}
+	
+	public List<Item> findByName(String name) {
+		System.out.println("name Rep: " + name);
+		String sql ="SELECT id,name,description,price_m,price_l,image_path,deleted FROM items WHERE name like :name";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%"+name+"%");
+		List<Item> itemList = template.query(sql, param, ITEM_ROW_MAPPER);
+		return itemList;
 	}
 
 }

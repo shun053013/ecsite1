@@ -13,19 +13,25 @@ import com.example.service.ShowItemService;
 @Controller
 @RequestMapping("")
 public class ShowItemListController {
-	
+
 	@Autowired
 	private ShowItemService showItemService;
+
+	@RequestMapping("/showItem")
+	public String showItemList(Model model) {
+		List<Item> itemList = showItemService.ShowItem();
+		model.addAttribute("itemList", itemList);
+		return "item_list";
+
+	}
 	
-	@RequestMapping("/showitem")
-    public String showItemList(Model model){
-	     List<Item> itemList=showItemService.ShowItem();
-	     model.addAttribute("itemList",itemList);
-	     return "item_list";		
-    	
-    }
-    
-	
-	
+	@RequestMapping("/searchByName")
+	public String searchByName(String name,Model model) {
+		System.out.println("name : " + name);
+		List<Item> itemList = showItemService.searchByName(name);
+		model.addAttribute("itemList",itemList);
+		return "item_list";
+		
+	}
 
 }

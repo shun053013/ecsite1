@@ -10,7 +10,7 @@ public class Item {
 	private Integer priceL;
 	private String imagePath;
 	private Boolean deleted;
-	private List<Item> toppingList;
+	private List<Topping> toppingList;
 	public Integer getId() {
 		return id;
 	}
@@ -53,10 +53,10 @@ public class Item {
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
 	}
-	public List<Item> getToppingList() {
+	public List<Topping> getToppingList() {
 		return toppingList;
 	}
-	public void setToppingList(List<Item> toppingList) {
+	public void setToppingList(List<Topping> toppingList) {
 		this.toppingList = toppingList;
 	}
 	@Override
