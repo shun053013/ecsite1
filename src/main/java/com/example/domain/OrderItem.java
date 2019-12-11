@@ -9,7 +9,34 @@ public class OrderItem {
 	private Integer quantity;
 	private Character size;
 	private Item item;
-	private List<OrderItem> orderToppingList;
+	private List<OrderTopping> orderToppingList;
+
+	public int getSubTotal() {
+		int subtotal = 0;
+		int toppingtotal = 0;
+
+		if (size.equals('M')) {
+			if (orderToppingList != null) {
+				for (OrderTopping ordertopping : orderToppingList) {
+					toppingtotal += ordertopping.getTopping().getPriceM();
+
+				}
+			}
+			if (item != null) {
+				subtotal = (item.getPriceM() + toppingtotal) * quantity;
+			}
+
+		}else {
+			if(orderToppingList !=null) {
+				for(OrderTopping ordertopping : orderToppingList ) {
+					toppingtotal += ordertopping.getTopping().getPriceL();
+				}
+			}if(item!=null) {
+				subtotal=(item.getPriceL()+toppingtotal)*quantity;
+			}
+		}return subtotal;
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -59,14 +86,13 @@ public class OrderItem {
 		this.item = item;
 	}
 
-	public List<OrderItem> getOrderToppingList() {
+	public List<OrderTopping> getOrderToppingList() {
 		return orderToppingList;
 	}
 
-	public void setOrderToppingList(List<OrderItem> orderToppingList) {
+	public void setOrderToppingList(List<OrderTopping> orderToppingList) {
 		this.orderToppingList = orderToppingList;
 	}
-	
 
 	@Override
 	public String toString() {

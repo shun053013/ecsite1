@@ -17,7 +17,35 @@ public class Order {
 	private Timestamp deliveryTime;
 	private Integer paymentMethod;
 	private User user;
-	private List<Order> orderList;
+	private List<OrderItem> orderItemList;
+	private String destinationEmail;
+
+	public int getTax() {
+		int tax = 0;
+		for (OrderItem orderItem : orderItemList) {
+			tax += orderItem.getSubTotal() * 0.01;
+		}
+		return tax;
+
+	}
+
+	public int getCalcTotalPrice() {
+		int totalPrice = 0;
+		int calcTotalPrice = 0;
+		for (OrderItem orderItem : orderItemList) {
+			totalPrice += orderItem.getSubTotal();
+		}
+		calcTotalPrice = totalPrice + getTax();
+		return calcTotalPrice;
+	}
+
+	public String getDestinationEmail() {
+		return destinationEmail;
+	}
+
+	public void setDestinationEmail(String destinationEmail) {
+		this.destinationEmail = destinationEmail;
+	}
 
 	public Integer getId() {
 		return id;
@@ -115,12 +143,12 @@ public class Order {
 		this.user = user;
 	}
 
-	public List<Order> getOrderList() {
-		return orderList;
+	public List<OrderItem> getOrderItemList() {
+		return orderItemList;
 	}
 
-	public void setOrderList(List<Order> orderList) {
-		this.orderList = orderList;
+	public void setOrderItemList(List<OrderItem> orderItemList) {
+		this.orderItemList = orderItemList;
 	}
 
 }
