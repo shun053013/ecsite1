@@ -2,6 +2,7 @@ package com.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Order;
 import com.example.domain.OrderItem;
@@ -12,6 +13,7 @@ import com.example.repository.OrderRepository;
 import com.example.repository.OrderToppingRepository;
 
 @Service
+@Transactional
 public class ShoppingCartService {
 
 	@Autowired
@@ -35,6 +37,7 @@ public class ShoppingCartService {
 	 */
 	public void addItem(Integer userId, OrderItemForm orderItemForm) {
 		Order order = orderRepository.findByUserIdAndStatus(userId, 0);
+		
 		if (order == null) {
 			order = new Order();
 			order.setUserId(userId);

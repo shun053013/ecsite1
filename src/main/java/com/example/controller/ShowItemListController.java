@@ -17,7 +17,7 @@ public class ShowItemListController {
 	@Autowired
 	private ShowItemService showItemService;
 
-	@RequestMapping("/showItem")
+	@RequestMapping("/")
 	public String showItemList(Model model) {
 		List<Item> itemList = showItemService.ShowItem();
 		model.addAttribute("itemList", itemList);

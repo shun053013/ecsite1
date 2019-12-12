@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * ログイン画面を表示するコントローラクラス.
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  *
  */
 @Controller
+@RequestMapping("/login")
 public class ToLoginPageController {
 	
 	@Autowired
@@ -31,21 +33,20 @@ public class ToLoginPageController {
 	 * @throws IOException 
 	 * @throws ServletException 
 	 */
-	@RequestMapping("/toLoginPage")
-	public String toLoginPage() throws ServletException, IOException {
-		System.out.println("urlpassは" + request.getHeader("REFERER"));
-		if(request.getHeader("REFERER").equals("http://localhost:8080/showRegisterUserPage") || request.getHeader("REFERER").equals("http://localhost:8080/registerUser")) {
-		}else {
-			session.setAttribute("referer", request.getHeader("REFERER"));
+	@RequestMapping("/toLogin")
+	//public String toLoginPage() throws ServletException, IOException {
+	public String toLoginPage(Model model,@RequestParam(required=false)String error) {
+		if(error != null ) {
+			model.addAttribute("error", "メールアドレス、またはパスワードが間違っています");
 		}
-		System.out.println(request.getHeader("REFERER"));
-		return "login";
+		return "login.html";
 	}
 	
 	@RequestMapping("/toLoginPageError")
 	public String toLoginPageError(Model model) throws ServletException, IOException {
 		model.addAttribute("error", "メールアドレス、またはパスワードが間違っています");
-		return "login";
+		System.err.println("aaa");
+		return "login.html";
 	}
 	
 	

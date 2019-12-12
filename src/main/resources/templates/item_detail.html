@@ -5,6 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ピザ屋のネット注文</title>
+<script th:src="@{https://code.jquery.com/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/item_detail.js}"></script>
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/piza.css" rel="stylesheet">
 <!--[if lt IE 9]>
@@ -75,12 +77,12 @@
 									<label class="radio-inline">
 										<input type="radio"
 											name="size" value="M"checked="checked">
-										<span class="price">&nbsp;М&nbsp;</span> <span th:text="${item.priceM}" id="price_M"></span>&nbsp;&nbsp;円(税抜)
+										<span class="price">&nbsp;М&nbsp;</span>&nbsp;&nbsp; <span th:text="${item.priceM}" id="price_M"></span>円(税抜)
 									</label>
 									<label class="radio-inline">
 										<input type="radio"
 											name="size" value="L" checked="checked">
-										<span class="price">&nbsp;Ｌ</span> <span th:text="${item.priceL}" id="price_L"></span>&nbsp;&nbsp;円(税抜)
+										<span class="price">&nbsp;Ｌ</span>&nbsp;&nbsp; <span th:text="${item.priceL}" id="price_L"></span>円(税抜)
 									</label>
 								</div>
 							</div>
@@ -159,7 +161,9 @@
 				<div class="row">
 					<div class="col-xs-offset-2 col-xs-10">
 						<div class="form-group">
-							<span id="total_price">この商品金額：38,000 円(税抜)</span>
+					
+							<h2>この商品金額：<span id="total_price">円(税抜)</span>円(税抜)</h2>
+						
 						</div>
 					</div>
 				</div>

@@ -54,14 +54,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests() // 認可に関する設定
 
-			.antMatchers("/","/showItem","/showItemDetail","/showCartList","/toLoginPage","/registerUser","/showRegisterUserPage","/insertOrderItem","/deleteOrder","/toLoginPageError","/deleteOrder2","/privacy/**","/insertOrderItem","/showCartList","/register","/loginAfterSuccess","/delete").permitAll() //「/」などのパスは全てのユーザに許可
+			.antMatchers(
+					"/"
+					,"/showItemDetail"
+					,"/showCartList"
+					,"/toLoginPage"
+					,"/registerUser"
+					,"/showRegisterUserPage"
+					,"/insertOrderItem"
+					,"/deleteOrder"
+					,"/toLoginPageError"
+					,"/deleteOrder2"
+					,"/privacy/**"
+					,"/insertOrderItem"
+					,"/showCartList"
+					,"/register"
+					,"/loginAfterSuccess"
+					,"/delete"
+					,"/loginProcess"
+					,"/login/**"
+					,"/doLogin").permitAll() //「/」などのパスは全てのユーザに許可
 			.anyRequest().authenticated(); // それ以外のパスは認証が必要
 
 		http.formLogin() // ログインに関する設定
-			.loginPage("/toLoginPage") // ログイン画面に遷移させるパス(ログイン認証が必要なパスを指定してかつログインされていないとこのパスに遷移される)
-			.loginProcessingUrl("/login") // ログインボタンを押した際に遷移させるパス(ここに遷移させれば自動的にログインが行われる)
-			.failureUrl("/toLoginPageError") //ログイン失敗に遷移させるパス
-			.defaultSuccessUrl("/loginAfterSuccess", true) // 第1引数:デフォルトでログイン成功時に遷移させるパス
+			.loginPage("/login/toLogin") // ログイン画面に遷移させるパス(ログイン認証が必要なパスを指定してかつログインされていないとこのパスに遷移される)
+			.loginProcessingUrl("/doLogin") // ログインボタンを押した際に遷移させるパス(ここに遷移させれば自動的にログインが行われる)
+			.failureUrl("/login/toLogin?error=true") //ログイン失敗に遷移させるパス
+			.defaultSuccessUrl("/", true) // 第1引数:デフォルトでログイン成功時に遷移させるパス
 			                                        // 第2引数: true :認証後常に第1引数のパスに遷移 
 			                                        //         false:認証されてなくて一度ログイン画面に飛ばされてもログインしたら指定したURLに遷移
 			.usernameParameter("email") // 認証時に使用するユーザ名のリクエストパラメータ名(今回はメールアドレスを使用)

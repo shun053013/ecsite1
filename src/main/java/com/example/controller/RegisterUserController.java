@@ -45,7 +45,7 @@ public class RegisterUserController {
 
 		registerUserService.RegisterUser(user);
 
-		return "login_user";
+		return "redirect:/toLoginPage";
 
 	}
 

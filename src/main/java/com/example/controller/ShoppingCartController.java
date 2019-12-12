@@ -41,8 +41,8 @@ public class ShoppingCartController {
 			userId = (Integer) (session.getAttribute("userId"));
 		} else {
 			userId = new BigInteger(session.getId(), 16).intValue();
-			session.setAttribute("userId", userId);
 		}
+		session.setAttribute("userId", userId);
 		shoppingCartService.addItem(userId, orderItemform);
 		return "redirect:/showCartList";
 
@@ -65,8 +65,8 @@ public class ShoppingCartController {
 			userId = (Integer) (session.getAttribute("userId"));
 		} else {
 			userId = new BigInteger(session.getId(), 16).intValue();
-			session.setAttribute("userId", userId);
 		}
+		session.setAttribute("userId", userId);
 		Order order = shoppingCartService.showCart(userId);
 
 		if (order == null || order.getOrderItemList().size() == 0) {
