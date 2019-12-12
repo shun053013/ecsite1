@@ -4,6 +4,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import com.example.domain.OrderItem;
+
 public class OrderForm {
 	/**	オーダーID */
 	private String id;
@@ -48,6 +50,8 @@ public class OrderForm {
 	private String cardName;
 	/**	セキュリティコード */
 	private String cardCvv;
+	
+
 	
 	public String getId() {
 		return id;

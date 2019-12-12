@@ -3,6 +3,7 @@ package com.example.form;
 import java.util.List;
 
 import com.example.domain.Item;
+import com.example.domain.OrderTopping;
 
 public class OrderItemForm {
 	/**	注文された商品のID */
@@ -18,7 +19,9 @@ public class OrderItemForm {
 	/**	商品 */
 	private Item item;
 	/**	トッピングリスト */
-	private List<Integer> toppingList;
+	private List<Integer> orderToppingList;
+	
+
 
 	public Integer getId() {
 		return id;
@@ -56,16 +59,22 @@ public class OrderItemForm {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-	public List<Integer> getToppingList() {
-		return toppingList;
+
+
+	public List<Integer> getOrderToppingList() {
+		return orderToppingList;
 	}
-	public void setToppingList(List<Integer> toppingList) {
-		this.toppingList = toppingList;
+
+
+	public void setOrderToppingList(List<Integer> orderToppingList) {
+		this.orderToppingList = orderToppingList;
 	}
+
+
 	@Override
 	public String toString() {
 		return "OrderItemForm [id=" + id + ", itemId=" + itemId + ", orderId=" + orderId + ", quantity=" + quantity
-				+ ", size=" + size + ", item=" + item + ", toppingList=" + toppingList + "]";
+				+ ", size=" + size + ", item=" + item + ", orderToppingList=" + orderToppingList + "]";
 	}
 
 }

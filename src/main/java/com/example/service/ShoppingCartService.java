@@ -52,10 +52,10 @@ public class ShoppingCartService {
 		orderItem.setSize(orderItemForm.getSize());
 		orderItemRepository.insert(orderItem);
 
-		if (orderItemForm.getToppingList() != null) {
+		if (orderItemForm.getOrderToppingList() != null) {
 			OrderTopping orderTopping = new OrderTopping();
 
-			for (Integer toppingId : orderItemForm.getToppingList()) {
+			for (Integer toppingId : orderItemForm.getOrderToppingList()) {
 
 				orderTopping.setToppingId(toppingId);
 				orderTopping.setOrderItemId(orderItem.getId());

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Order;
+import com.example.domain.OrderItem;
 import com.example.form.OrderForm;
+import com.example.form.OrderItemForm;
 import com.example.repository.OrderRepository;
 
 /**
@@ -34,11 +36,12 @@ public class OrderService {
 	 */
 	public Order registerOrder(OrderForm form) {
 		System.out.println("OrderServiceのForm" + form);
-		Order order = orderRepository.load(Integer.parseInt(form.getId()));
+		Order order= new Order();
+		Order newOrder = orderRepository.load(Integer.parseInt(form.getId()));
 		System.err.println(order);
 		order.setId(Integer.parseInt(form.getId()));
 //		order.setUserId(Integer.parseInt(form.getUserId()));
-		order.setTotalPrice(Integer.parseInt(form.getTotalPrice()));
+		order.setTotalPrice(newOrder.getCalcTotalPrice());
 		order.setDestinationName(form.getDestinationName());
 		order.setDestinationEmail(form.getDestinationEmail());
 		order.setDestinationAddress(form.getDestinationAddress());
